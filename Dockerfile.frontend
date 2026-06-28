@@ -1,0 +1,36 @@
+# Stage 1: Build the React app
+FROM node:20-alpine AS builder
+
+WORKDIR /app/client
+
+# Copy package files
+COPY client/package*.json ./
+
+# Install dependencies
+RUN npm install
+
+# Copy client code
+COPY client/ .
+
+# Build the app
+RUN npm run build
+
+# Stage 2: Serve the built app
+FROM node:20-alpine
+
+WORKDIR /app
+
+# Install serve to run the production build
+RUN npm install -g serve
+
+# Copy built app from builder
+COPY --from=builder /app/client/dist ./dist
+
+# Expose frontend port
+EXPOSE 3000
+
+# Set environment
+ENV NODE_ENV=production
+
+# Start the app
+CMD ["serve", "-s", "dist", "-l", "3000"]
