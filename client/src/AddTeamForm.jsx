@@ -83,7 +83,7 @@ function AddTeamForm({ onTeamAdded }) {
     <Card sx={{ mb: 3, boxShadow: 3 }}>
       <CardContent>
         <Typography variant="h5" component="h2" sx={{ mb: 3, fontWeight: 'bold', color: '#667eea' }}>
-          Add New Teamssss
+          Add New Teamssssss
         </Typography>
 
         <Box component="form" onSubmit={handleSubmit}>
